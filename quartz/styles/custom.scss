@@ -1,3 +1,72 @@
 @use "./base.scss";
 
 // put your custom CSS here!
+:root {
+  --radius: 0;
+}
+
+article p,
+article li {
+  line-height: 1.75;
+}
+
+article {
+  max-width: 68ch;
+}
+
+a {
+  text-underline-offset: 0.14em;
+  text-decoration-thickness: 0.06em;
+}
+
+header {
+  margin: 1.25rem 0 0.75rem;
+}
+
+header .page-title {
+  flex: 1;
+  font-size: 1.125rem;
+  margin: 0;
+}
+
+header .page-title a {
+  color: var(--dark);
+}
+
+header .search {
+  max-width: 22rem;
+  min-width: 14rem;
+}
+
+.page > #quartz-body {
+  grid-template-columns: minmax(0, 72ch);
+  grid-template-rows: auto auto auto;
+  grid-template-areas:
+    "grid-header"
+    "grid-center"
+    "grid-footer";
+  justify-content: center;
+}
+
+.page .sidebar.left,
+.page .sidebar.right {
+  display: none;
+}
+
+.page .center,
+.page .page-header,
+.page footer {
+  min-width: 0 !important;
+}
+
+.page .center > hr {
+  margin: 1rem auto;
+}
+
+.page .page-footer:empty {
+  display: none;
+}
+
+footer {
+  margin-bottom: 1.25rem;
+}
