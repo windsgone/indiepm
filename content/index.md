@@ -1,6 +1,5 @@
 ---
-title: Welcome to Quartz
+title: Welcome to Indie PM
 ---
 
-This is a blank Quartz installation.
-See the [documentation](https://quartz.jzhao.xyz) for how to get started.
+这里是阅读原文的原文。
