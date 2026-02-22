@@ -30,6 +30,12 @@ li.section-li {
   }
 }
 
+ul.section-ul.no-tags {
+  & > li.section-li > .section {
+    grid-template-columns: fit-content(8em) 1fr;
+  }
+}
+
 // modifications in popover context
 .popover .section {
   grid-template-columns: fit-content(8em) 1fr !important;

@@ -94,6 +94,7 @@ export default ((opts?: Partial<FolderContentOptions>) => {
       ...props,
       sort: options.sort,
       allFiles: allPagesInFolder,
+      showTags: false,
     }
 
     const content = (

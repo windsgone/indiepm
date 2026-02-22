@@ -1,4 +1,5 @@
 import { QuartzConfig } from "./quartz/cfg"
+import { byDateAndAlphabetical } from "./quartz/components/PageList"
 import * as Plugin from "./quartz/plugins"
 
 /**
@@ -6,53 +7,56 @@ import * as Plugin from "./quartz/plugins"
  *
  * See https://quartz.jzhao.xyz/configuration for more information.
  */
-const config: QuartzConfig = {
-  configuration: {
-    pageTitle: "Indie PM",
-    pageTitleSuffix: "",
-    enableSPA: true,
-    enablePopovers: false,
-    analytics: {
-      provider: "plausible",
+const configuration: QuartzConfig["configuration"] = {
+  pageTitle: "Indie PM",
+  pageTitleSuffix: "",
+  enableSPA: true,
+  enablePopovers: false,
+  analytics: {
+    provider: "plausible",
+  },
+  locale: "en-US",
+  baseUrl: "windsgone.github.io/indiepm",
+  ignorePatterns: ["private", "templates", ".obsidian"],
+  defaultDateType: "published",
+  theme: {
+    fontOrigin: "googleFonts",
+    cdnCaching: true,
+    typography: {
+      title: "Noto Sans SC",
+      header: "Noto Sans SC",
+      body: "Noto Sans SC",
+      code: "IBM Plex Mono",
     },
-    locale: "en-US",
-    baseUrl: "windsgone.github.io/indiepm",
-    ignorePatterns: ["private", "templates", ".obsidian"],
-    defaultDateType: "modified",
-    theme: {
-      fontOrigin: "googleFonts",
-      cdnCaching: true,
-      typography: {
-        header: "IBM Plex Sans",
-        body: "IBM Plex Sans",
-        code: "IBM Plex Mono",
+    colors: {
+      lightMode: {
+        light: "#F5F5F5",
+        lightgray: "#EEEEEE",
+        gray: "#D1D1D1",
+        darkgray: "#6C6C6C",
+        dark: "#1E1E1E",
+        secondary: "#286EE0",
+        tertiary: "#1B5FCC",
+        highlight: "rgba(40, 110, 224, 0.10)",
+        textHighlight: "rgba(255, 230, 128, 0.45)",
       },
-      colors: {
-        lightMode: {
-          light: "#ffffff",
-          lightgray: "#efefef",
-          gray: "#d6d6d6",
-          darkgray: "#666666",
-          dark: "#111111",
-          secondary: "#111111",
-          tertiary: "#555555",
-          highlight: "rgba(0, 0, 0, 0.06)",
-          textHighlight: "rgba(255, 230, 0, 0.35)",
-        },
-        darkMode: {
-          light: "#111111",
-          lightgray: "#2a2a2a",
-          gray: "#3c3c3c",
-          darkgray: "#c7c7c7",
-          dark: "#f2f2f2",
-          secondary: "#f2f2f2",
-          tertiary: "#bdbdbd",
-          highlight: "rgba(255, 255, 255, 0.10)",
-          textHighlight: "rgba(255, 230, 0, 0.30)",
-        },
+      darkMode: {
+        light: "#0F1114",
+        lightgray: "#1C1F24",
+        gray: "#2B3036",
+        darkgray: "#C7CDD4",
+        dark: "#F4F6F8",
+        secondary: "#8DA3BF",
+        tertiary: "#6F86A6",
+        highlight: "rgba(141, 163, 191, 0.12)",
+        textHighlight: "rgba(255, 225, 128, 0.30)",
       },
     },
   },
+}
+
+const config: QuartzConfig = {
+  configuration,
   plugins: {
     transformers: [
       Plugin.FrontMatter(),
@@ -68,8 +72,7 @@ const config: QuartzConfig = {
       }),
       Plugin.ObsidianFlavoredMarkdown({ enableInHtmlEmbed: false }),
       Plugin.GitHubFlavoredMarkdown(),
-      Plugin.TableOfContents(),
-      Plugin.CrawlLinks({ markdownLinkResolution: "shortest" }),
+      Plugin.CrawlLinks({ markdownLinkResolution: "shortest", openLinksInNewTab: true }),
       Plugin.Description(),
       Plugin.Latex({ renderEngine: "katex" }),
     ],
@@ -78,7 +81,9 @@ const config: QuartzConfig = {
       Plugin.AliasRedirects(),
       Plugin.ComponentResources(),
       Plugin.ContentPage(),
-      Plugin.FolderPage(),
+      Plugin.FolderPage({
+        sort: byDateAndAlphabetical(configuration),
+      }),
       Plugin.TagPage(),
       Plugin.ContentIndex({
         enableSiteMap: true,
