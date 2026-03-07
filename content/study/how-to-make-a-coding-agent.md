@@ -2,7 +2,7 @@
 title: 如何实现一个 Coding Agent？
 tags: [study]
 published: 2026-02-02
-draft： true
+draft: true
 ---
 
 ## 缘起
